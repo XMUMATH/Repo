@@ -1,0 +1,385 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+%\fancyfoot{} % Blank out the default footer
+%\fancyhead[C]{Running title $\bullet$ May 2016 $\bullet$ Vol. XXI, No. 1} % Custom header text
+%\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{amsmath}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{Proof}[section]
+
+\usepackage{graphicx}
+\usepackage{subfigure}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Report} % Article title
+%\author{%
+%\textsc{John Smith}\thanks{A thank you or further information} \\[1ex] % Your name
+%\normalsize University of California \\ % Your institution
+%\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
+%\and % Uncomment if 2 authors are required, duplicate these 4 lines if more
+%\textsc{Jane Smith}\thanks{Corresponding author} \\[1ex] % Second author's name
+%\normalsize University of Utah \\ % Second author's institution
+%\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
+%}
+\date{\today} % Leave empty to omit a date
+%\renewcommand{\maketitlehookd}{%
+%\begin{abstract}
+%\noindent \blindtext % Dummy abstract text - replace \blindtext with your abstract text
+%\end{abstract}
+%}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{introduction}
+
+%\lettrine[nindent=0em,lines=3]{L} orem ipsum dolor sit amet, consectetur adipiscing elit.
+Inspired from the work of Di Xie \emph{et al} \cite{Orthogonal_weights} and Self-Normalizing Neural Networks (SNN)\cite{SNNs} in this report we deduced a mean and variance preserving mapping which is set between two convolution layers. Some notes will be introduced before do our analysis. $\mathbf{x}\in\mathbb{R}^{n}$ is input signal, and $\mathbf{y}=g(W^{T}\mathbf{x})\in\mathbb{R}^{m}$ where $g$ is activation function, $W$ is filter bank, $n = k \times k \times c$ and $m = d$. Furtherly $k \times k$ is the spatial size of filters, $c$ is the number of input channels, and $d$ is the number of filters. Similarly, $\mu_y$ and $\nu_y$ is the mean and variance of $\mathbf{y}$ respectively. For better understanding of the mean and variance, we can review $\mathbf{\widehat{x}}\in\mathbb{R}^{k \times k \times c}$, $\mathbf{y}\in\mathbb{R}^{d}$, and $\widehat{W}\in\mathbb{R}^{k \times k \times c \times d}$ in a tensor form. Note that $\mathbf{\widehat{x}}$ and $ \mathbf{x}$ can be reshaped from each other. So do between $\widehat{W}$ and $W$. For $l$th conv layer, an output signal $\mathbf{y}_{l}=\widehat{W}_{l}\bigodot\mathbf{x}_{l}+\mathbf{b}$ is generated by dot producting between filter bank $\widehat{W}_{l}$ and corresponding elements in $\mathbf{\widehat{x}}_{l}$. And we have $\mathbf{\widehat{x}}_{l}=g(\mathbf{y}'_{l-1})$, note that $\mathbf{y}'_{l-1}\in\mathbb{R}^{k \times k \times c}$ . The output $\mathbf{y}_{l}$ can be viewed as a discrete sampling from a latent variable $v$ by different filters. The mean and variance is for the sampled information of the variable $v$. In this opinion, with some algebra tricks, we can write $\mu_{y_{l}}$, $\nu_{y_{l}}$ in a compact form.
+For the mean, it's obviously to see these equivalent relations,
+\begin{align}\label{mean}
+%&\mu_{x_{l}} = \mathbf{E}(g(\mathbf{y}_{l-1})) = \frac{1}{k^{2}}\big(k^{2}\mathbf{E}(g(\mathbf{y}_{l-1}))\big) = \frac{1}{k^{2}}\big( \mathbb{1}_{n_l}^{T}\mathbf{x}_{l}\frac{1}{c}\big) = \mathbb{1}_{n_l}^{T}\mathbf{x}_{l}\frac{1}{n_l} \\
+&\mu_{y_{l}} = \mathbf{E}(\mathbf{y}_{l}) = \mathbf{E}(W_{l}^{T}\mathbf{x}_{l}) = \mathbb{1}_{m_l}^{T}W_{l}^{T}\mathbf{x}_{l}\frac{1}{m_l} = \mathbb{1}_{m_l}^{T}W_{l}^{T}\mathbf{x}_{l}\frac{1}{m_l}
+\end{align}
+For the variance,
+\begin{align}\label{var_x}
+{\nu_{y_{l}}}^{2}
+& = \frac{1}{m_l}\|\mathbf{y}_{l}-\mu_{y_{l}}\mathbb{1}_{m_l}\|^2_2   \\
+& = \frac{1}{m_l}\langle \mathbf{y}_{l}-\mu_{y_{l}}\mathbb{1}_{m_l}, \mathbf{y}_{l}-\mu_{y_{l}}\mathbb{1}_{m_l}\rangle   \\
+& = \frac{1}{m_l}\big(\langle \mathbf{y}_{l}, \mathbf{y}_{l}\rangle-2\langle \mathbf{y}_{l}, \mu_{y_{l}}\mathbb{1}_{m_1}\rangle+\langle \mu_{x_{l}}\mathbb{1}_{n_l}, \mu_{y_{l}}\mathbb{1}_{n_l}\rangle\big)  \\
+& = \frac{1}{m_l}\big(\|\mathbf{y}_{l}\|^2_2-2\mu_{x_{l}}{\mathbb{1}}^{T}_{m_l}\mathbf{y}_{l}+{m_l}\mu_{y_{l}}^2)  \\
+& = \frac{1}{m_l}\|\mathbf{y}_{l}\|^2_2-2\mu_{y_{l}}{\mathbb{1}}^{T}_{m_l}\mathbf{y}_{l}\frac{1}{m_l}+\mu_{y_{l}}^2  \\
+& = \frac{1}{m_l}\|\mathbf{y}_{l}\|^2_2-\mu_{y_{l}}^2  \\
+\end{align}
+%Like $\nu_{x_{l}}$ we have,
+%\begin{align}\label{var_y}
+%&{\nu_{y_{l}}}^{2} = \frac{\|W_{l}^{T}\mathbf{x}_{l}\|^{2}_{2}}{m_l}-{\mu_{y_{l}}}^2
+%\end{align}
+where, $\mathbb{1}$ is column vector which is full of ones.
+
+Following the former notes, we want to construct a mapping which satisfies that,
+\begin{align}\label{mapping}
+F_{g,W}: \mathbb{R}^2 \rightarrow \mathbb{R}^2  \quad and \quad  F\begin{pmatrix} \mu_{y_{l-1}}\\ \nu_{y_{l-1}} \end{pmatrix}=\begin{pmatrix} \mu_{y_{l}}\\ \nu_{y_{l}} \end{pmatrix}=\begin{pmatrix} \mu_{y_{l-1}}\\ \nu_{y_{l-1}} \end{pmatrix}
+\end{align}
+This idea is sketched out in Fig~\ref{pipeline}.
+\begin{figure}
+  \centering
+  % Requires
+  \includegraphics[width=0.8\textwidth]{figs/pipeline.png}\\
+  \caption{The simplified pipeline of network. The red boxed unit has iso-symmetric distribution around zero. We want to keep the mean and variance invariant in tensor flow.}\label{pipeline}
+\end{figure}
+
+
+
+
+\section{construct the mapping}
+There are two constrains in Eq.\ref{mapping}, $\mu_{y_{l-1}}=\mu_{y_{l}}$ and $\nu_{y_{l-1}}=\nu_{y_{l}}$. In the following part we will unpack the constrains into regular terms. We firstly focus on $\mu_{y_{l-1}}=\mu_{y_{l}}$. If we let $W$ have a iso-symmetric distribution around zero and $\mathbf{b}=0$, then $\mathbf{y}$ has zero mean and also has a iso-symmetric distribution around zero. In fact we observed an interesting dynamic phenomenon about the weights $W$. That is the weights $W$ initialed with random method, like 'msra' method , is always iso-symmetric. Fig~\ref{distri_wet} and Fig~\ref{image_wet} validated the phenomenon. And Fig~\ref{Out_put_set} also validated the iso-symmetric distribution of $\mathbf{y}$.
+\begin{figure}
+  \centering
+  % Requires
+  \includegraphics[width=0.8\textwidth]{figs/distri_wet.png}\\
+  \caption{From left to right, catching a glimpse of the distribution of filter banks $W$ in 1st, 2th, 3th and 4th layer of a well convergent net. It is obviously to see that the distributions are highly iso-symmetric around zero.}\label{distri_wet}
+\end{figure}
+
+\begin{figure}
+  \centering
+  % Requires
+  \includegraphics[width=0.8\textwidth]{figs/image_wet.png}\\
+  \caption{From top to bottom, show the unfolded filter bank $W$ in Fg~\ref{distri_wet} in an image form. As we can see in the images, the filter banks have an obvious symmetric property.}\label{image_wet}
+\end{figure}
+
+\begin{figure}
+  \centering
+  % Requires
+  \includegraphics[width=0.8\textwidth]{figs/Out_put_set.png}\\
+  \caption{Show the iso-symmetric output responses after convolution. }\label{Out_put_set}
+\end{figure}
+
+%To clarify the iso-symmetric property of $W$, we give out the following description,
+%\begin{align}\label{constrain1}
+%\mu_{y_{l-1}}=\mu_{y_{l}}=0
+%\end{align}
+So based on these proper assumptions, we can always have,
+\begin{align}\label{constrain1}
+\mu_{y_{l-1}}=\mu_{y_{l}}=0
+%\mu_x&=\mu_y  \\
+%\mathbb{1}_{n}^{T}\mathbf{x}\frac{1}{n}&=\mathbb{1}_{m}^{T}W^{T}\mathbf{x}\frac{1}{m} \\
+%0&=[\frac{n}{m}(\mathbb{1}_{m}^{T}W^T)-\mathbb{1}_{n}^{T}]\mathbf{x}    \\
+%\Leftrightarrow 0&=[\frac{n}{m}(\mathbb{1}_{m}^{T}W^T)-\mathbb{1}_{n}^{T}]  \\
+%&\mathbb{1}_{m}^{T}W^T=\frac{m}{n}\mathbb{1}_{n}^{T}
+\end{align}
+
+%A lemma will be given, before we talk about variance.
+%\begin{lemma}\label{lemma}
+%If $x$ is a vector whose elements is iso-symmetric distributed, then we have $\frac{1+\alpha^2}{2}\|x\|_2^2=\|g(x)\|_2^2$, where $g=max\{\alpha x_i,x_i\}, \alpha \in [0,1)$.
+%\end{lemma}
+When the first constrain is satisfied, we analysis on $\nu_{y_{l-1}}=\nu_{y_{l}}$.
+\begin{align}\label{constrain2}
+\nu_{y_{l-1}}&=\nu_{y_{l}}  \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}-{\mu_{{y}_{l-1}}}^2&=\frac{\|\mathbf{y}_{l}\|^{2}_{2}}{m_l}-{\mu_{y_{l}}}^2 \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{\|{W_l}^{T}\mathbf{x}_{l}\|^{2}_{2}}{m_l},\ with\ \mu_{y_{l-1}}=\mu_{y_{l}}=0.\\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{\|{W_l}^{T}g\big(\mathbf{y}'_{l-1}\big)\|^{2}_{2}}{m_l} \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{1}{m_l}{g\big(\mathbf{y}'_{l-1}\big)}^{T}{W_l}{W_l}^{T}g\big(\mathbf{y}'_{l-1}\big) \\
+%\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{n}&=\frac{1}{m}{g\big(\mathbf{y}'_{l-1}\big)}^{T}WW^{T}g\big(\mathbf{y}'_{l-1}\big) \\
+\end{align}
+If we constrain $W$ with some designed properties, we may be able to preserve the variance of $\mathbf{y}$. When $W$ is orthogonal matrix, we can achieve that,
+\begin{align}
+\mathbf{y} = W^{T}\mathbf{x}
+\end{align}
+Note that the unfolded $W$ must be an iso-symmetric matrix. To satisfies these constrains simultaneously, we designed $W$ with a structure like,
+\begin{align}
+&W = \begin{pmatrix} W_{lf},  W_{rt} \end{pmatrix}, \quad  W_{rt}=-FW_{lf} \\
+&{W_{lf}}^{T}{W_{lf}}={W_{lf}}{W_{lf}}^{T}=sI, \quad F^{T}=F, \quad FF=I
+\end{align}
+Where $F=\begin{pmatrix} 0,0, ... ,0,1 \\ 0,0, ...,1,0 \\ ..,..,..,..,.. \\ 1,0, ... ,0,0 \end{pmatrix}\in\mathbb{R}^{n/2 \times m}$ is an left-to-right flipper and $s\in\mathbb{R}$. With this structure, we have,
+\begin{align}
+{W}{W}^{T}&=\begin{pmatrix} W_{lf},  W_{rt} \end{pmatrix} \begin{pmatrix} {W_{lf}}^{T} \\  {W_{rt}}^{T} \end{pmatrix} \\
+&=\begin{pmatrix} W_{lf}{W_{lf}}^{T}, -W_{lf}{W_{lf}}^{T}F \\ -FW_{lf}{W_{lf}}^{T},  FW_{lf}{W_{lf}}^{T}F \end{pmatrix}  \\
+&=\begin{pmatrix} sI, -sIF \\ -sFI,  sFIF \end{pmatrix}  \\
+&=\begin{pmatrix} sI, -sF \\ -sF,  sI \end{pmatrix}  \\
+&=s\begin{pmatrix} I, -F \\ -F,  I \end{pmatrix}  \\
+\end{align}
+Replace ${W}{W}^{T}$ with $s\begin{pmatrix} I, -F \\ -F,  I \end{pmatrix}$,
+%If we let ${W_l}{W_l}^{T}=sI$ where $s\in\mathbb{R}$,$I\in\mathbb{R}^{n_l \times n_l}$ and with Lemma~\ref{lemma}.
+\begin{align}
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{s_l}{m_l}{g\big(\mathbf{y}'_{l-1}\big)}^{T}\begin{pmatrix} I_l, -F_l \\ -F_l,  I_l \end{pmatrix}g\big(\mathbf{y}'_{l-1}\big) \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{s_l}{m_l}{\begin{pmatrix} \mathbf{y}'_{l-1,lf} \\ -\alpha\mathbf{y}'_{l-1,lf} \end{pmatrix}}^{T}\begin{pmatrix} I_l, -F_l \\ -F_l,  I_l \end{pmatrix}\begin{pmatrix} \mathbf{y}'_{l-1,lf} \\ -\alpha\mathbf{y}'_{l-1,lf} \end{pmatrix} \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{s_l}{m_l} \big({\mathbf{y}'_{l-1,lf}}^{T} \mathbf{y}'_{l-1,lf}+\alpha{\mathbf{y}'_{l-1,lf}}^{T}\mathbf{y}'_{l-1,lf}                 \\ &+\alpha{\mathbf{y}'_{l-1,lf}}^{T}F_{l}F_{l}\mathbf{y}'_{l-1,lf}+{\alpha}^{2}{\mathbf{y}'_{l-1,lf}}^{T}F_{l}F_{l}\mathbf{y}'_{l-1,lf}\big) \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{s_l}{2m_l} \big( \|\mathbf{y}'_{l-1}\|_2^2+\alpha \|\mathbf{y}'_{l-1}\|_2^2+\alpha \|\mathbf{y}'_{l-1}\|_2^2+{\alpha}^{2} \|\mathbf{y}'_{l-1}\|_2^2 \big) \\
+%\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=s\frac{\|g\big(\mathbf{y}'_{l-1}\big)\|_2^2}{m_l} \\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=s_l\frac{(1+\alpha)^2}{2}\frac{\|\mathbf{y}'_{l-1}\|_2^2}{m_l}\\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=s_l\frac{(1+\alpha)^2}{2}(\frac{n_l}{m_l})\frac{\|\mathbf{y}'_{l-1}\|_2^2}{n_l}\\
+\frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=s_l\frac{(1+\alpha)^2}{2}(\frac{n_l}{m_l})\frac{\|\mathbf{y}'_{l-1}\|_2^2}{{c_l}{k_l}^2}\\
+with\ \frac{\|\mathbf{y}_{l-1}\|^{2}_{2}}{c_l}&=\frac{\|\mathbf{y}'_{l-1}\|_2^2}{{c_l}{k_l}^2}, \quad s_l=\frac{2}{(1+\alpha)^2}(\frac{m_l}{n_l}) \\
+\end{align}
+We can obtain that,
+\begin{align}
+\nu_{y_{l-1}}&=\nu_{y_{l}} \\
+\Leftrightarrow s_l&=\frac{2}{(1+\alpha)^2}(\frac{m_l}{n_l}) \\
+\Leftrightarrow {W_l}{W_l}^{T}&=\frac{2}{(1+\alpha)^2}(\frac{m_l}{n_l})\begin{pmatrix} I_l, -F_l \\ -F_l,  I_l \end{pmatrix}  \\
+\end{align}
+%------------------------------------------------
+
+\section{Loss function}
+In this part we proposed a generalized loss function under the two constrains. Denote $L$ as the loss function of a task. And easily we can use the following two terms to regularize the constrains,
+\begin{align}\label{Loss fuction}
+\tilde{L}=L+\sum_{i=1}^{l}\lambda_{i}\|\big(\frac{2}{1+\alpha^2}\big)\frac{m_{i}}{n_i}I_{n_i}-{W_i}{W_i}^{T}\|_2^2
+%\tilde{L}=L+\sum_{i=1}^{l-1}\big(\alpha_{i}\|\frac{n_{i+1}}{n_i}I_{n_i}-WW^{T}\|+\beta_{i}\|\mathbb{1}_{n_{i+1}}^{T}W^T-\frac{n_{i+1}}{n_i}\mathbb{1}_{n_i}^{T}\|\big)
+\end{align}
+where $l$ is the number of layers in network.
+\section{Analysis on Resnet}
+To embed proposed regular term into resnet structure, in this section we do some analysis on resnet. And we surprisedly to find out that there is a great improvement for resnet. We reference the mathematical notes from~\cite{identity_mapping}. Benefiting from resnet structure we have the following sequential relationship.
+\begin{align}\label{res_gradient}
+x_{l+1}=x_{l}+\mathcal{F}(x_{l},W_{l})=x_{l}+\mathcal{F}_{l}
+\end{align}
+Differing from~\cite{identity_mapping}, we analysis Eq~\ref{res_gradient} in a more clear way. Denoting the loss function as $L$, with the chain rule of backpropagation we have,
+\begin{align}\label{backpro}
+\frac{\partial L}{\partial x_{l}}&=\frac{\partial L}{\partial x_{L}}\frac{\partial x_{L}}{\partial x_{L-1}}, ..., \frac{\partial x_{l+1}}{\partial x_{l}} \\
+&=\frac{\partial L}{\partial x_{L}}\frac{\partial(x_{L-1}+\mathcal{F}_{L-1})}{\partial x_{L-1}}, ..., \frac{\partial(x_{l}+\mathcal{F}_{l})}{\partial x_{l}}  \\
+&=\frac{\partial L}{\partial x_{L}}(1+\frac{\partial \mathcal{F}_{L-1}}{\partial x_{L-1}}), ..., (1+\frac{\partial \mathcal{F}_{l}}{\partial x_{l}})   \\
+&=\frac{\partial L}{\partial x_{L}}(1+g_{L-1}), ..., (1+g_{l})   \\
+%&=\frac{\partial L}{\partial x_{L}}\Pi_{i=l}^{L-1}(1+g_{i})   \\
+&=\frac{\partial L}{\partial x_{L}}\prod_{i=l}^{L-1}(1+g_{i})   \\
+&=\frac{\partial L}{\partial x_{L}}\big(1+\sum_{i=l}^{L-1}g_{i}+\sum_{i=2}^{L-l}(\sum_{j=1}^{C_{(L-l,i)}}\prod_{k \in C_{i,j}}g_{k})\big)
+\end{align}
+where $g=\frac{\partial \mathcal{F}}{\partial x}$, $C_{(L-l,i)}$ is the number of combinations, and $C_{i,j}$ which has $i$ elements is the $j$th selected index combination from $\{l,l+1,.. ,L-l\}$ . In ~\cite{identity_mapping}, He \textit{et al} tried to use a modulating scalar $\lambda_{l}$ to explore more improvements and given out the following formulas,
+\begin{align}\label{He_res1}
+x_{l+1}=\lambda_{l}x_{l}+\mathcal{F}_{l}
+\end{align}
+So,
+\begin{align}\label{He_res2}
+\frac{\partial L}{\partial x_{l}}&=\frac{\partial L}{\partial x_{L}}(\prod_{i=l}^{L-1}\lambda_{i}+\frac{\partial}{\partial x_{l}}\sum_{i=l}^{L-1}\mathcal{F}_{i})
+\end{align}
+With Eq.~\ref{He_res2} He thought that because of exponential effects, when $\lambda \neq 1$ the backpropagation signal would be blocked. However we think this conclusion is not proper. The Eq.~\ref{He_res2} is not unpack well enough and the experiments in ~\cite{identity_mapping} is limited on $\lambda \leq 1$. With Eq.~\ref{backpro} in the following part we will show that with a designed scalar $\lambda$ we can amplify backpropagation signal which lead to a definite improvement. Introduce an unify scalar $\lambda$ into sequential relationship. 
+\begin{align}\label{res_gradient}
+x_{l+1}=\lambda x_{l}+\mathcal{F}(x_{l},W_{l})=\lambda x_{l}+\mathcal{F}_{l}
+\end{align}
+\begin{align}\label{amp_backpro}
+\frac{\partial L}{\partial x_{l}}&=\frac{\partial L}{\partial x_{L}}\frac{\partial x_{L}}{\partial x_{L-1}}, ..., \frac{\partial x_{l+1}}{\partial x_{l}} \\
+&=\frac{\partial L}{\partial x_{L}}\frac{ \partial(\lambda x_{L-1}+\mathcal{F}_{L-1})}{\partial x_{L-1}}, ..., \frac{ \partial(\lambda x_{l}+\mathcal{F}_{l})}{\partial x_{l}}  \\
+&=\frac{\partial L}{\partial x_{L}}(\lambda+\frac{\partial \mathcal{F}_{L-1}}{\partial x_{L-1}}), ..., (\lambda+\frac{\partial \mathcal{F}_{l}}{\partial x_{l}})   \\
+&=\frac{\partial L}{\partial x_{L}}(\lambda+g_{L-1}), ..., (\lambda+g_{l})   \\
+&=\frac{\partial L}{\partial x_{L}}\lambda^{L-l}(1+\frac{g_{L-1}}{\lambda}), ..., (1+\frac{g_{l}}{\lambda})   \\
+&=\lambda^{L-l}\frac{\partial L}{\partial x_{L}}\big(1+\frac{1}{\lambda}\sum_{i=l}^{L-1}g_{i}+\sum_{i=2}^{L-l}(\sum_{j=1}^{C_{(L-l,i)}}\prod_{k\in C_{i,j}} \frac{g_{k}}{\lambda})\big)   \\
+&=\lambda^{L-l}\frac{\partial L}{\partial x_{L}}\big(1+\frac{1}{\lambda}\sum_{i=l}^{L-1}g_{i}+\sum_{i=2}^{L-l}\frac{1}{\lambda^{i}}(\sum_{j=1}^{C_{(L-l,i)}}\prod_{k\in C_{i,j}}g_{k})\big)   \\
+&=\lambda^{L-l-1}\frac{\partial L}{\partial x_{L}}\big(\lambda+\sum_{i=l}^{L-1}g_{i}+\sum_{i=2}^{L-l}\frac{1}{\lambda^{i-1}}(\sum_{j=1}^{C_{(L-l,i)}}\prod_{k\in C_{i,j}}g_{k})\big)
+\end{align}
+If $\lambda>1$, the first two terms $(\lambda+\sum_{i=l}^{L-1}g_{i})$ will be amplified relatively and the chaos term $\sum_{i=2}^{L-l}\frac{1}{\lambda^{i-1}}(\sum_{j=1}^{C_{(L-l,i)}}\prod_{k\in C_{i,j}}g_{k})$ will be shrinkaged. This option can force the multiplied gradients get closer to the summated gradients which is preferred for backpropagation. On the other hand, $\lambda^{L-l-1}$ can further amplify the backpropagation signals. The last problem is how to select a proper $\lambda$. In this method, we do not need to worry about the exponential effects. Because we can set a up abound according with the number of residual block. For example, for a net with $n$ residual blocks, we can set $\lambda=\sqrt[n-2]{c}$, where $c$ is the maximal amplify value for the net. 
+
+
+\section{Experiments on CIFAR10}
+In this section we roughly show some experiments. Fig~\ref{compare_44} shows out the acc top 1 result of three kinds of 44-layer network. Fig~\ref{fig:Feasub1 plain}-\ref{fig:logits mynet} show the distribution of transmitted signals.
+
+\begin{figure}
+  \centering
+  % Requires
+  \includegraphics[width=1.2\textwidth]{figs/compare_plain&mynet_44.png}\\
+  \caption{Comparison between plain net and two kings of our proposed nets. With iso-symmetric orthogonal regular, the net can performance better than plain net and orthogonally regularized one.}\label{compare_44}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub1plain.png}
+\caption{Feasub1 plain}
+\label{fig:Feasub1 plain}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub1mynet.png}
+\caption{Feasub1 mynet}
+\label{fig:Feasub1 mynet}
+\end{minipage}
+\end{figure}
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub2plain.png}
+\caption{Feasub2 plain}
+\label{fig:Feasub2 plain}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub2mynet.png}
+\caption{Feasub2 mynet}
+\label{fig:Feasub2 mynet}
+\end{minipage}
+\end{figure}
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub3plain.png}
+\caption{Feasub3 plain}
+\label{fig:Feasub3 plain}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub3mynet.png}
+\caption{Feasub3 mynet}
+\label{fig:Feasub3 mynet}
+\end{minipage}
+\end{figure}
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub4plain.png}
+\caption{Feasub4 plain}
+\label{fig:Feasub4 plain}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/Feasub4mynet.png}
+\caption{Feasub4 mynet}
+\label{fig:Feasub4mynet}
+\end{minipage}
+\end{figure}
+\begin{figure}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/logitsplain.png}
+\caption{logits plain}
+\label{fig:logits plain}
+\end{minipage}%
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+\includegraphics[width=3.3in]{figs/logitsmynet.png}
+\caption{logits mynet}
+\label{fig:logits mynet}
+\end{minipage}
+\end{figure}
+
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+\bibitem[1]{Orthogonal_weights}
+Xie D, Xiong J, Pu S. All You Need is Beyond a Good Init: Exploring Better Solution for Training Extremely Deep Convolutional Neural Networks with Orthonormality and Modulation. 2017.
+
+\bibitem[2]{SNNs}
+Klambauer G, Unterthiner T, Mayr A, et al. Self-Normalizing Neural Networks. 2017.
+
+\bibitem[3]{msra}
+K. He, X. Zhang, S. Ren, and J. Sun.  Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. 2015.
+
+\bibitem[3]{identity_mapping}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun.  Identity Mappings in Deep Residual Networks 2016.
+
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
